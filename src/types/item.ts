@@ -2,13 +2,13 @@
  * Exam Item Types
  */
 
-import type { z } from "zod";
+import type { z } from 'zod';
 import type {
   AuditActionTypeSchema,
   ItemStatusSchema,
   ItemTypeSchema,
   SecurityLevelSchema,
-} from "../schema/item.js";
+} from '../schema/item.js';
 
 export type ItemType = z.infer<typeof ItemTypeSchema>;
 export type ItemStatus = z.infer<typeof ItemStatusSchema>;
@@ -59,8 +59,8 @@ export interface UpdateItemRequest {
   subject?: string;
   itemType?: ItemType;
   difficulty?: number;
-  content?: Partial<ExamItem["content"]>;
-  metadata?: Partial<ExamItem["metadata"]>;
+  content?: Partial<ExamItem['content']>;
+  metadata?: Partial<ExamItem['metadata']>;
   securityLevel?: SecurityLevel;
 }
 

@@ -1,23 +1,23 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 // Defined constants from glossary and example input.
 export const ITEM_TYPES = [
-  "multiple-choice",
-  "free-response",
-  "essay",
+  'multiple-choice',
+  'free-response',
+  'essay',
 ] as const;
 export const ITEM_STATUSES = [
-  "draft",
-  "review",
-  "approved",
-  "archived",
+  'draft',
+  'review',
+  'approved',
+  'archived',
 ] as const;
-export const SECURITY_LEVELS = ["standard", "secure", "highly-secure"] as const;
+export const SECURITY_LEVELS = ['standard', 'secure', 'highly-secure'] as const;
 // For audit trail purposes (create, update, and create version are separate events).
 export const AUDIT_ACTION_TYPES = [
-  "item-created",
-  "item-updated",
-  "item-version-created",
+  'item-created',
+  'item-updated',
+  'item-version-created',
 ] as const;
 
 export const ItemTypeSchema = z.enum(ITEM_TYPES);

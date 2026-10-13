@@ -6,9 +6,9 @@
  *
  */
 
-import { ZodError } from "zod";
-import { CreateItemSchema } from "../schema/item.js";
-import { getItemStorage } from "../storage/index.js";
+import { ZodError } from 'zod';
+import { CreateItemSchema } from '../schema/item.js';
+import { getItemStorage } from '../storage/index.js';
 
 const storage = getItemStorage();
 
@@ -27,17 +27,17 @@ export async function createItemHandler(data: any) {
   } catch (error) {
     // Handle errors appropriately
     if (error instanceof ZodError) {
-      console.error("Validation failed");
+      console.error('Validation failed');
       return {
         statusCode: 400,
-        body: { error: "Validation error, invalid request" },
+        body: { error: 'Validation error, invalid request' },
       };
     }
 
-    console.error("Error creating item:", error);
+    console.error('Error creating item:', error);
     return {
       statusCode: 500,
-      body: { error: "Internal server error" },
+      body: { error: 'Internal server error' },
     };
   }
 }
