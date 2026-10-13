@@ -2,10 +2,23 @@
  * Exam Item Types
  */
 
+import type { z } from "zod";
+import type {
+  AuditActionTypeSchema,
+  ItemStatusSchema,
+  ItemTypeSchema,
+  SecurityLevelSchema,
+} from "../schema/item.js";
+
+export type ItemType = z.infer<typeof ItemTypeSchema>;
+export type ItemStatus = z.infer<typeof ItemStatusSchema>;
+export type SecurityLevel = z.infer<typeof SecurityLevelSchema>;
+export type AuditActionType = z.infer<typeof AuditActionTypeSchema>;
+
 export interface ExamItem {
   id: string;
   subject: string; // e.g., "AP Biology", "AP Calculus"
-  itemType: string; // "multiple-choice", "free-response", "essay"
+  itemType: ItemType; // "multiple-choice", "free-response", "essay"
   difficulty: number; // 1-5
   content: {
     question: string;
@@ -18,15 +31,15 @@ export interface ExamItem {
     created: number; // timestamp
     lastModified: number; // timestamp
     version: number;
-    status: string; // "draft", "review", "approved", "archived"
+    status: ItemStatus; // "draft", "review", "approved", "archived"
     tags: string[];
   };
-  securityLevel: string; // "standard", "secure", "highly-secure"
+  securityLevel: SecurityLevel; // "standard", "secure", "highly-secure"
 }
 
 export interface CreateItemRequest {
   subject: string;
-  itemType: string;
+  itemType: ItemType;
   difficulty: number;
   content: {
     question: string;
@@ -36,24 +49,24 @@ export interface CreateItemRequest {
   };
   metadata: {
     author: string;
-    status: string;
+    status: ItemStatus;
     tags: string[];
   };
-  securityLevel: string;
+  securityLevel: SecurityLevel;
 }
 
 export interface UpdateItemRequest {
   subject?: string;
-  itemType?: string;
+  itemType?: ItemType;
   difficulty?: number;
   content?: Partial<ExamItem["content"]>;
   metadata?: Partial<ExamItem["metadata"]>;
-  securityLevel?: string;
+  securityLevel?: SecurityLevel;
 }
 
 export interface ListItemsQuery {
   limit?: number;
   offset?: number;
   subject?: string;
-  status?: string;
+  status?: ItemStatus;
 }
