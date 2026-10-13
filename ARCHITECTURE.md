@@ -44,9 +44,25 @@ Stretch: Handler factory: Common wrapper for handler validation, error mapping, 
 
 **Keys**
 
-- PK Item ID (UUID)
+ItemsTable
+
+- PK = ITEM#<id>
+- SK = CURRENT
+- GSI1PK = SUBJECT#<subject>
+- GSI1SK = STATUS#<status>#<updatedAt>
+
+AuditTrailTable
+
+- PK = ITEM#<id>
+- SK = EVENT#<ulid>
 
 ## Infra
+
+- DynamoDB tables
+- Lambda functions (separate)
+- IAM / Auth
+- API Gateway
+- Cloudwatch
 
 ## Scalability
 

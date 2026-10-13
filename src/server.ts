@@ -8,8 +8,13 @@
 import { createServer, IncomingMessage, ServerResponse } from 'http';
 import { createItemHandler } from './handlers/createItem';
 import { getItemHandler } from './handlers/getItem';
+import { updateItemHandler } from './handlers/updateItem';
 
 const PORT = process.env.PORT || 3000;
+const createItemRouteRegex = /\/api\/items/i;
+const getItemRouteRegex =
+  /\/api\/items\/[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}/i;
+const getItemTestRouteRegex = /\/api\/items\/test/i;
 
 async function handleRequest(req: IncomingMessage, res: ServerResponse) {
   const { method, url } = req;
@@ -39,13 +44,13 @@ async function handleRequest(req: IncomingMessage, res: ServerResponse) {
 
   try {
     let result;
+    if (!url) throw new Error('Invalid API url');
 
-    // Example routes - implement your own routing logic
-    if (method === 'GET' && url === '/api/items/test') {
+    if (method === 'GET' && getItemTestRouteRegex.test(url)) {
       result = await getItemHandler('test');
-    } else if (method === 'POST' && url === '/api/items') {
+    } else if (method === 'POST' && createItemRouteRegex.test(url)) {
       result = await createItemHandler(parsedBody);
-    } else if (method === 'GET' && url?.startsWith('/api/items/')) {
+    } else if (method === 'GET' && getItemRouteRegex.test(url)) {
       const id = url.split('/').pop();
       result = await getItemHandler(id!);
     } else {
