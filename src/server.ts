@@ -6,7 +6,6 @@
  */
 
 import { createServer, IncomingMessage, ServerResponse } from "http";
-// import { getItemHandler, createItemHandler } from "./handlers/items.js";
 import { createItemHandler } from "./handlers/createItem";
 import { getItemHandler } from "./handlers/getItem";
 

@@ -2,7 +2,7 @@
  * API Handler for creating a new exam item.
  * POST /api/items
  *
- * Creates a version 1 item with item-created action for audit trial.
+ * Creates a version 1 item with item-created action for audit trail.
  *
  */
 
